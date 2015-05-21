@@ -13,8 +13,7 @@
     "fs": "0.0.2",
     "iconv": "^2.1.6",
     "lodash": "^3.3.0",
-    "node-csv": "^0.1.2",
-    "q": "^1.2.0"
+    "node-csv": "^0.1.2"
   },
   "devDependencies": {
     "grunt-este-watch": "^0.1.18",
