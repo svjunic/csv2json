@@ -1,7 +1,7 @@
-user,field1,field2
-sv.junic1,Hogehoge,Mogeta
-sv.junic2,Hogehoge,Mogeta
-sv.junic3,Hogehoge,Mogeta
-sv.junic4,Hogehoge,Mogeta
-sv.junic5,Hogehoge,Mogeta
-sv.junic6,Hogehoge,Mogeta
+user,field1,field2:field2Child1,field2:field2Child2,field3:field3Child:field3ChildChild
+sv.junic1,field1Value,field2-1Value,field2-2Value,100
+sv.junic1,field1Value,field2-1Value,field2-2Value,100
+sv.junic1,field1Value,field2-1Value,field2-2Value,100
+sv.junic1,field1Value,field2-1Value,field2-2Value,100
+sv.junic1,field1Value,field2-1Value,field2-2Value,100
+sv.junic1,field1Value,field2-1Value,field2-2Value,100

@@ -1,20 +1,107 @@
 # csv2json
-csv(input.csv)をjson(output.json)に変換するだけのアプリ
+This module returns the CSV file in Json file or object.
 
+input.csv
 ```
-user,field1,field2
-sv.junic1,Hogehoge,Mogeta
-sv.junic2,Hogehoge,Mogeta
-sv.junic3,Hogehoge,Mogeta
-sv.junic4,Hogehoge,Mogeta
-sv.junic5,Hogehoge,Mogeta
-sv.junic6,Hogehoge,Mogeta
-```
-
-これが
-
-```
-[{"user":"sv.junic1","field1":"Hogehoge","field2":"Mogeta"},{"user":"sv.junic2","field1":"Hogehoge","field2":"Mogeta"},{"user":"sv.junic3","field1":"Hogehoge","field2":"Mogeta"},{"user":"sv.junic4","field1":"Hogehoge","field2":"Mogeta"},{"user":"sv.junic5","field1":"Hogehoge","field2":"Mogeta"},{"user":"sv.junic6","field1":"Hogehoge","field2":"Mogeta"}]
+user,field1,field2:field2Child1,field2:field2Child2,field3:field3Child:field3ChildChild
+sv.junic1,field1Value,field2-1Value,field2-2Value,100
+sv.junic1,field1Value,field2-1Value,field2-2Value,100
+sv.junic1,field1Value,field2-1Value,field2-2Value,100
+sv.junic1,field1Value,field2-1Value,field2-2Value,100
+sv.junic1,field1Value,field2-1Value,field2-2Value,100
+sv.junic1,field1Value,field2-1Value,field2-2Value,100
 ```
 
-こうなる
+output.json
+```
+[{"user":"sv.junic1","field1":"field1Value","field2":{"field2Child1":"field2-1Value","field2Child2":"field2-2Value"},"field3":{"field3Child":{"field3ChildChild":"100"}}},{"user":"sv.junic1","field1":"field1Value","field2Child1":{"field2":"field2-1Value"},"field2Child2":{"field2":"field2-2Value"},"field3ChildChild":{"field3Child":{"field3":"100"}}},{"user":"sv.junic1","field1":"field1Value","field2":{"field2Child1":"field2-1Value","field2Child2":"field2-2Value"},"field3":{"field3Child":{"field3ChildChild":"100"}}},{"user":"sv.junic1","field1":"field1Value","field2Child1":{"field2":"field2-1Value"},"field2Child2":{"field2":"field2-2Value"},"field3ChildChild":{"field3Child":{"field3":"100"}}},{"user":"sv.junic1","field1":"field1Value","field2":{"field2Child1":"field2-1Value","field2Child2":"field2-2Value"},"field3":{"field3Child":{"field3ChildChild":"100"}}},{"user":"sv.junic1","field1":"field1Value","field2Child1":{"field2":"field2-1Value"},"field2Child2":{"field2":"field2-2Value"},"field3ChildChild":{"field3Child":{"field3":"100"}}}]
+```
+
+```
+[
+    {
+        "user": "sv.junic1",
+        "field1": "field1Value",
+        "field2": {
+            "field2Child1": "field2-1Value",
+            "field2Child2": "field2-2Value"
+        },
+        "field3": {
+            "field3Child": {
+                "field3ChildChild": "100"
+            }
+        }
+    },
+    {
+        "user": "sv.junic1",
+        "field1": "field1Value",
+        "field2Child1": {
+            "field2": "field2-1Value"
+        },
+        "field2Child2": {
+            "field2": "field2-2Value"
+        },
+        "field3ChildChild": {
+            "field3Child": {
+                "field3": "100"
+            }
+        }
+    },
+    {
+        "user": "sv.junic1",
+        "field1": "field1Value",
+        "field2": {
+            "field2Child1": "field2-1Value",
+            "field2Child2": "field2-2Value"
+        },
+        "field3": {
+            "field3Child": {
+                "field3ChildChild": "100"
+            }
+        }
+    },
+    {
+        "user": "sv.junic1",
+        "field1": "field1Value",
+        "field2Child1": {
+            "field2": "field2-1Value"
+        },
+        "field2Child2": {
+            "field2": "field2-2Value"
+        },
+        "field3ChildChild": {
+            "field3Child": {
+                "field3": "100"
+            }
+        }
+    },
+    {
+        "user": "sv.junic1",
+        "field1": "field1Value",
+        "field2": {
+            "field2Child1": "field2-1Value",
+            "field2Child2": "field2-2Value"
+        },
+        "field3": {
+            "field3Child": {
+                "field3ChildChild": "100"
+            }
+        }
+    },
+    {
+        "user": "sv.junic1",
+        "field1": "field1Value",
+        "field2Child1": {
+            "field2": "field2-1Value"
+        },
+        "field2Child2": {
+            "field2": "field2-2Value"
+        },
+        "field3ChildChild": {
+            "field3Child": {
+                "field3": "100"
+            }
+        }
+    }
+]
+```

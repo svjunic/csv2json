@@ -27,16 +27,50 @@ dumpCsv( 'input.csv' )
     var dataValue = data[0];
     var dataName = dataValue.shift();
 
+    // valueが配列の場合は深い階層にJsonを構築するため配列化
+    _.forEach( dataName, function ( value, key, object ) {
+      if( /:/.test( value ) ) {
+        dataName[ key ] = value.split( ':' );
+      }
+    });
+
+
+
     var createJson =  _.map( dataValue, function ( values ) {
-        var newData = {};
-        _.forEach( values, function ( value, key, object ) {
-          newData[ dataName[key] ] = value;
+      var newData = {};
+
+      _.forEach( values, function ( value, key, object ) {
+        var hash = dataName[key];
+        if( hash &&
+          typeof hash === 'object' &&
+          typeof hash.length === 'number' &&
+          typeof hash.splice === 'function' &&
+          !(hash.propertyIsEnumerable('length')) ) {
+            newData = _.merge( newData, deepProperty( hash, value ) )
+          } else {
+            newData[ dataName[key] ] = value;
+          }
         });
         console.log( newData );
         return newData;
       });
 
-
     var str = JSON.stringify( createJson );
     fs.writeFile('output.json', str );
   });
+
+function deepProperty( hash, newValue ) {
+  var result;
+  reverseData = hash.reverse()
+  _.forEach( reverseData, function ( value, key, object ) {
+    if( typeof result === 'undefined' ) {
+      result = {};
+      result[value] = newValue
+    } else {
+      resultChild = result;
+      result = {};
+      result[ value ] = resultChild;
+    }
+  });
+  return result;
+}
