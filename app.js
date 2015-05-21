@@ -30,7 +30,7 @@ dumpCsv( 'input.csv' )
     // valueが配列の場合は深い階層にJsonを構築するため配列化
     _.forEach( dataName, function ( value, key, object ) {
       if( /:/.test( value ) ) {
-        dataName[ key ] = value.split( ':' );
+        dataName[ key ] = value.split( ':' ).reverse();
       }
     });
 
@@ -61,8 +61,7 @@ dumpCsv( 'input.csv' )
 
 function deepProperty( hash, newValue ) {
   var result;
-  reverseData = hash.reverse()
-  _.forEach( reverseData, function ( value, key, object ) {
+  _.forEach( hash, function ( value, key, object ) {
     if( typeof result === 'undefined' ) {
       result = {};
       result[value] = newValue
