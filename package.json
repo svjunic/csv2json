@@ -1,10 +1,19 @@
 {
   "name": "createjson",
   "version": "0.0.1",
-  "description": "csv to json",
-  "author": "sv.junic@gmail.com",
+  "description": "This module returns the CSV file in Json file or object.",
+  "author": "Jun Fujimura <sv.junic@gmail.com> (http://sv.junic.jp)",
   "scripts": {
-    "start": "grunt"
+    "test": "./node_modules/mocha/bin/mocha test.js"
+  },
+  "keywords": [
+    "node.js",
+    "csv",
+    "json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/svjunic/csv2json.git"
   },
   "private": true,
   "license": "MIT",
