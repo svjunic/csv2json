@@ -1,5 +1,5 @@
 var assert   = require('assert');
-var csv2json = require('./app.js');
+var csv2json = require('./csv2json.js');
 
 describe('パラメータ', function() {
     it('CSVファイルが正しく読み込める', function() {
