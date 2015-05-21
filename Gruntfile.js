@@ -8,7 +8,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON("package.json"),
     esteWatch: {
       options: {
-        dirs: [ './' ],
+        dirs: [ './', './test' ],
         livereload: {
           enabled: false,
           //extensions: [ 'js' ],

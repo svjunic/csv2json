@@ -5,7 +5,7 @@
   "author": "Jun Fujimura <sv.junic@gmail.com> (http://sv.junic.jp)",
   "main":"csv2json.js",
   "scripts": {
-    "test": "mocha test.js"
+    "test": "mocha test/main.js"
   },
   "keywords": [
     "node.js",

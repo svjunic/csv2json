@@ -68,8 +68,9 @@ module.exports = function( inputPath, outputPath, option ){
             });
       
           var str = JSON.stringify( createJson );
+          if( debug ) str = JSON.stringify( createJson, null, '    ' );
 
-          if( _.isString( outputPath ) && outputPath === '' ) {
+          if( _.isString( outputPath ) && outputPath !== '' ) {
             fs.writeFile( outputPath, str );
           }
 
