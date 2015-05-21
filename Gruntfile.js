@@ -1,4 +1,4 @@
-// #"Last Change: 23-Feb-2015."
+// #"Last Change: 21-May-2015."
 
 module.exports = function(grunt) {
 
@@ -22,7 +22,8 @@ module.exports = function(grunt) {
         stderr: false
       },
       target: {
-        command: 'node app.js'
+        //command: 'node app.js'
+        command: 'npm test'
       }
     }
   });
