@@ -4,7 +4,7 @@
   "description": "This module returns the CSV file in Json file or object.",
   "author": "Jun Fujimura <sv.junic@gmail.com> (http://sv.junic.jp)",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha test.js"
+    "test": "mocha test.js"
   },
   "keywords": [
     "node.js",
