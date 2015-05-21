@@ -12,17 +12,26 @@ var _ = require('lodash');
  *
  * @param  {String} inputPath 読み込むファイルのパス
  * @param  {String} outputPath 出力先（省略した場合はオブジェクト型を戻す）
- * @param  {Option} option { delimitter:':' }
+ * @param  {Option} option { delimitter:':', pretty:true }
  *
  * @return {String} 出力したデータ内容
  */
 module.exports = function( inputPath, outputPath, option ){
 
-  var debug = false;
+  var debug, pretty;
 
   if( _.isObject( option ) && option.debug ) {
     debug = true;
+  } else {
+    debug = false
   }
+
+  if( _.isObject( option ) && option.pretty ) {
+    pretty = true;
+  } else {
+    pretty = false
+  }
+
 
 
   /**
@@ -67,8 +76,12 @@ module.exports = function( inputPath, outputPath, option ){
               return newData;
             });
       
-          var str = JSON.stringify( createJson );
-          if( debug ) str = JSON.stringify( createJson, null, '    ' );
+          var str;
+          if( !pretty ) {
+            str = JSON.stringify( createJson );
+          } else {
+            str = JSON.stringify( createJson, null, '    ' );
+          }
 
           if( _.isString( outputPath ) && outputPath !== '' ) {
             fs.writeFile( outputPath, str );
