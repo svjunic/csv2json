@@ -29,6 +29,20 @@ return csv2jsonic.loadCSV( './test/csv/parameter2.csv' )
 ## Method
 
 ### loadCSV
+```
+// require
+var csv2jsonic = require('../csv2jsonic.js')();
+
+// option setup
+csv2jsonic.setup( { outputJsonPath: './test/json/parameter1.json' } );
+
+return csv2jsonic.loadCSV( './test/csv/parameter2.csv' )
+  .then( function ( data ) {
+    // complete save json
+    consone.log( data );
+    // [{"user":"sv.junic1","field1":"field1-1Value","field2":{"field2Child1":"field2-1Value","field2Child2":"field2-2Value"},"field3":{"field3Child":{"field3ChildChild":"100"}}}]
+  });
+```
 
 ### convert
 Convert an array of CSV format to the object of Json format.
