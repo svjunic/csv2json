@@ -9,7 +9,7 @@ describe('loadCSVメソッドのテスト', function() {
   describe('パラメータ', function() {
       it('CSVファイルが正しく読み込める', function() {
         csv2jsonic.setup( { outputJsonPath: './test/json/parameter1.json' } );
-        return csv2jsonic.loadCSV( './test/csv/parameter1.csv', './test/json/parameter1.json' )
+        return csv2jsonic.loadCSV( './test/csv/parameter1.csv' )
           .then( function ( data ) {
             assert( true );
           })

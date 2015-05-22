@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "This module returns the CSV file in Json file or object.",
   "author": "Jun Fujimura <sv.junic@gmail.com> (http://sv.junic.jp)",
-  "main":"csv2json.js",
+  "main": "csv2json.js",
   "scripts": {
     "test": "mocha test/main.js"
   },
@@ -27,6 +27,7 @@
     "node-csv": "^0.1.2"
   },
   "devDependencies": {
+    "grunt": "^0.4.5",
     "grunt-este-watch": "^0.1.18",
     "grunt-shell": "^1.1.1"
   }
