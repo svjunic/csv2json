@@ -1,5 +1,5 @@
 {
-  "name": "csv2json",
+  "name": "csv2jsonic",
   "version": "0.0.1",
   "description": "This module returns the CSV file in Json file or object.",
   "author": "Jun Fujimura <sv.junic@gmail.com> (http://sv.junic.jp)",
