@@ -10,27 +10,51 @@ var _ = require('lodash');
  *
  * delimitter: ':' default
  *
- * @param  {String} inputPath 読み込むファイルのパス
- * @param  {String} outputPath 出力先（省略した場合はオブジェクト型を戻す）
- * @param  {Option} option { delimitter:':', pretty:true }
- *
+ * @param  {String} input 読み込むファイルのパス
+ * @param  {Option} option { outputJsonPath:'', delimitter:':', pretty:true }
+ *       debug          : コンソールを出力します。
+ *       outputJsonPath : 出力するJsonのパス。空文字や文字列でない場合は出力しない。
+ *       delimitter     : CSVの区切り文字。１文字以上なければならない
+ *       pretty         : Jsonの出力形式。trueをいれると圧縮された状態で出力。
  * @return {String} 出力したデータ内容
  */
-module.exports = function( inputPath, outputPath, option ){
+module.exports = function( input, option ){
 
-  var debug, pretty;
+  var debug, pretty, delimitter, outputJsonPath;
+  var reg;
 
-  if( _.isObject( option ) && option.debug ) {
-    debug = true;
-  } else {
-    debug = false
+  if( _.isObject( option ) ) {
+    // debug
+    if( option.debug ) {
+      debug = true;
+    } else {
+      debug = false
+    }
+
+    // pretty
+    if( option.pretty ) {
+      pretty = true;
+    } else {
+      pretty = false
+    }
+
+    // outputJsonPath
+    if( _.isString( option.outputJsonPath ) ) {
+      outputJsonPath = option.outputJsonPath;
+    }
+
+    // delimitter
+    if( _.isObject( option ) && typeof _.isString( option.delimitter ) && option.delimitter !== '' ) {
+      delimitter = option.delimitter;
+    }
   }
 
-  if( _.isObject( option ) && option.pretty ) {
-    pretty = true;
-  } else {
-    pretty = false
+  // 区切り文字
+  if( _.isUndefined( delimitter ) ) {
+    delimitter = ':';
   }
+
+  reg = RegExp( delimitter );
 
 
 
@@ -40,17 +64,10 @@ module.exports = function( inputPath, outputPath, option ){
    * @return {Object} Promiseオブジェクト
    */
   function main() {
-    var reg, delimitter;
-    if( _.isObject( option ) && typeof _.isString( option.delimitter ) ) {
-      delimitter = option.delimitter
-    } else {
-      delimitter = ':'
-    }
-    reg = RegExp( delimitter );
 
     return new Promise( function( resolve, reject ){
 
-      _dumpCsv( inputPath )
+      _dumpCsv( input )
         .then( function ( data ) {
           var dataValue = data[0];
           var dataName = dataValue.shift();
@@ -83,8 +100,8 @@ module.exports = function( inputPath, outputPath, option ){
             str = JSON.stringify( createJson, null, '    ' );
           }
 
-          if( _.isString( outputPath ) && outputPath !== '' ) {
-            fs.writeFile( outputPath, str );
+          if( _.isString( outputJsonPath ) && outputJsonPath !== '' ) {
+            fs.writeFile( outputJsonPath, str );
           }
 
           resolve( createJson );

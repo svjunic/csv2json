@@ -26,7 +26,7 @@ describe('違う文字コードでも正しく動作するか', function() {
   it('UTF-8', function( done ) {
     input = './test/csv/fileformat1.csv';
     output = './test/json/fileformat1.json';
-    csv2json( input, output )
+    csv2json( input, { outputJsonPath: output } )
       .then( function ( data ) {
         assert( data[0].user   === 'sv.junic1' );
         assert( data[0].field1 === 'field1-1Value' );
@@ -39,7 +39,7 @@ describe('違う文字コードでも正しく動作するか', function() {
   it('Shift-JIS', function( done ) {
     input = './test/csv/fileformat2.csv';
     output = './test/json/fileformat2.json';
-    csv2json( input, output )
+    csv2json( input, { outputJsonPath: output } )
       .then( function ( data ) {
         assert( data[0].user   === 'sv.junic1' );
         assert( data[0].field1 === 'field1-1Value' );
@@ -57,7 +57,7 @@ describe('出力内容テスト', function() {
   it('区切り文字が";"で正しく出力される', function( done ) {
     input = './test/csv/delimitter1.csv';
     output = './test/json/delimitter1.json';
-    csv2json( input, output, { delimitter:':' } )
+    csv2json( input, { outputJsonPath:output, delimitter:':' } )
       .then( function ( data ) {
         assert( data[0].user   === 'sv.junic1' );
         assert( data[0].field1 === 'field1-1Value' );
@@ -70,7 +70,7 @@ describe('出力内容テスト', function() {
   it('区切り文字が"|"で正しく出力される', function( done ) {
     input = './test/csv/delimitter2.csv';
     output = './test/json/delimitter2.json';
-    csv2json( input, output, { delimitter:'|' } )
+    csv2json( input, { outputJsonPath:output, delimitter:'|' } )
       .then( function ( data ) {
         assert( data[0].user   === 'sv.junic1' );
         assert( data[0].field1 === 'field1-1Value' );
