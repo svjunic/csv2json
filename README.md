@@ -26,6 +26,22 @@ return csv2jsonic.loadCSV( './test/csv/parameter2.csv' )
   });
 ```
 
+## Method
+
+### loadCSV
+
+### convert
+Convert an array of CSV format to the object of Json format.
+```
+var testdata = [                                                                                
+  'user,field1,field2:mogeta',    
+  'sv.junic1,field1Value,field2Value'                                     
+];                                                                                              
+var csv2jsonic = require('../csv2jsonic.js')();
+console.log( csv2jsonic.convert( array ) );
+// => { user:"sv.junic1", field1:"field1Value", field2:{ mogeta: "field2Value" } }
+```
+
 ##  setup option
 
 ### debug
