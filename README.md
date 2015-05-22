@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/svjunic/csv2json.svg?branch=master)](https://travis-ci.org/svjunic/csv2json)
+[![Build Status](https://travis-ci.org/svjunic/csv2jsonic.svg?branch=master)](https://travis-ci.org/svjunic/csv2jsonic)
 
 # csv2jsonic
 This module returns the CSV file in Json file or object.
