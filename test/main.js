@@ -96,12 +96,12 @@ describe('loadCSVメソッドのテスト', function() {
 describe('convertメソッドのテスト', function() {
 
   var testdata = [
-    'user,field1,field2:field2Child1,field2:field2Child2,field3:field3Child:field3ChildChild',
-    'sv.junic1,field1-1Value,field2-1Value,field2-2Value,100'
+    [ "user","field1","field2:field2Child1","field2:field2Child2","field3:field3Child:field3ChildChild" ],
+    [ "sv.junic1","field1-1Value","field2-1Value","field2-2Value","100" ]
   ];
 
   it('CSVの配列をJsonに変換する', function() {
-    csv2jsonic.setup( { debug:true, pretty:true } );
+    csv2jsonic.setup( { pretty:true, delimitter:':' } );
     csv2jsonic.convert( testdata );
   });
 });
