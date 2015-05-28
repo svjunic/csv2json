@@ -13,7 +13,7 @@ npm install csv2jsonic
 
 ```
 // require
-var csv2jsonic = require('../csv2jsonic.js')();
+var csv2jsonic = require('csv2jsonic')();
 
 // option setup
 csv2jsonic.setup( { outputJsonPath: './test/json/parameter1.json' } );
