@@ -29,28 +29,50 @@ describe('loadCSVメソッドのテスト', function() {
     it('UTF-8', function( done ) {
       input = './test/csv/fileformat1.csv';
       output = './test/json/fileformat1.json';
-      csv2jsonic.setup( { outputJsonPath: output } );
+      csv2jsonic.setup( { outputJsonPath: output, charset: "utf-8" } );
       csv2jsonic.loadCSV( input )
         .then( function ( data ) {
-          assert( data[0].user   === 'sv.junic1' );
-          assert( data[0].field1 === 'field1-1Value' );
-          assert( data[0].field2.field2Child1 === 'field2-1Value' );
-          assert( data[0].field2.field2Child2 === 'field2-2Value' );
-          assert( data[0].field3.field3Child.field3ChildChild === '100' );
+
+          var success = {
+            user   : 'sv.junic1',
+            field1 : 'field1-1Value',
+            field2 : { field2Child1: 'field2-1Value',
+              field2Child2: 'field2-2Value'
+            },
+            field3 : {
+              field3Child: {
+                field3ChildChild: '100',
+              }
+            }
+          };
+
+          assert.deepEqual( data[0], success );
+
           filecheck( output, function(){ done(); } )
         });
     });
-    it('Shift-JIS', function( done ) {
+    it('cp932', function( done ) {
       input = './test/csv/fileformat2.csv';
       output = './test/json/fileformat2.json';
-      csv2jsonic.setup( { outputJsonPath: output } );
+      csv2jsonic.setup( { outputJsonPath: output, charset: "cp932" } );
       csv2jsonic.loadCSV( input )
         .then( function ( data ) {
-          assert( data[0].user   === 'sv.junic1' );
-          assert( data[0].field1 === 'field1-1Value' );
-          assert( data[0].field2.field2Child1 === 'field2-1Value' );
-          assert( data[0].field2.field2Child2 === 'field2-2Value' );
-          assert( data[0].field3.field3Child.field3ChildChild === '100' );
+
+          var success = {
+            user   : 'sv.junic1',
+            field1 : 'もげた',
+            field2 : { field2Child1: 'field2-1Value',
+              field2Child2: 'field2-2Value'
+            },
+            field3 : {
+              field3Child: {
+                field3ChildChild: 'もげぞう',
+              }
+            }
+          };
+
+          assert.deepEqual( data[0], success );
+
           filecheck( output, function(){ done(); } )
         })
     });
@@ -65,11 +87,22 @@ describe('loadCSVメソッドのテスト', function() {
       csv2jsonic.setup( { outputJsonPath:output, delimitter:':' } );
       csv2jsonic.loadCSV( input )
         .then( function ( data ) {
-          assert( data[0].user   === 'sv.junic1' );
-          assert( data[0].field1 === 'field1-1Value' );
-          assert( data[0].field2.field2Child1 === 'field2-1Value' );
-          assert( data[0].field2.field2Child2 === 'field2-2Value' );
-          assert( data[0].field3.field3Child.field3ChildChild === '100' );
+
+          var success = {
+            user   : 'sv.junic1',
+            field1 : 'field1-1Value',
+            field2 : { field2Child1: 'field2-1Value',
+              field2Child2: 'field2-2Value'
+            },
+            field3 : {
+              field3Child: {
+                field3ChildChild: '100',
+              }
+            }
+          };
+
+          assert.deepEqual( data[0], success );
+
           filecheck( output, function(){ done(); } )
         })
     });
@@ -79,11 +112,22 @@ describe('loadCSVメソッドのテスト', function() {
       csv2jsonic.setup( { outputJsonPath:output, delimitter:'|' } );
       csv2jsonic.loadCSV( input )
         .then( function ( data ) {
-          assert( data[0].user   === 'sv.junic1' );
-          assert( data[0].field1 === 'field1-1Value' );
-          assert( data[0].field2.field2Child1 === 'field2-1Value' );
-          assert( data[0].field2.field2Child2 === 'field2-2Value' );
-          assert( data[0].field3.field3Child.field3ChildChild === '100' );
+
+          var success = {
+            user   : 'sv.junic1',
+            field1 : 'field1-1Value',
+            field2 : { field2Child1: 'field2-1Value',
+              field2Child2: 'field2-2Value'
+            },
+            field3 : {
+              field3Child: {
+                field3ChildChild: '100',
+              }
+            }
+          };
+
+          assert.deepEqual( data[0], success );
+
           filecheck( output, function(){ done(); } )
         })
     });
@@ -102,7 +146,23 @@ describe('convertメソッドのテスト', function() {
 
   it('CSVの配列をJsonに変換する', function() {
     csv2jsonic.setup( { pretty:true, delimitter:':' } );
-    csv2jsonic.convert( testdata );
+
+    var convarted = csv2jsonic.convert( testdata );
+
+    var success = {
+      user   : 'sv.junic1',
+      field1 : 'field1-1Value',
+      field2 : { field2Child1: 'field2-1Value',
+        field2Child2: 'field2-2Value'
+      },
+      field3 : {
+        field3Child: {
+          field3ChildChild: '100',
+        }
+      }
+    };
+
+    assert.deepEqual( convarted[0], success );
   });
 });
  

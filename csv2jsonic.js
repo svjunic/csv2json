@@ -11,7 +11,7 @@
     var _ = require('lodash');
     var app = {
       debug         : false,
-      charset       : 'Shift_JIS',
+      charset       : 'cp932',
       pretty        : false,
       delimitter    : ':',
       reg           : /:/,
@@ -24,20 +24,22 @@
           if( option.debug ) {
             this.debug = true;
           }
-      
-          // pretty
-          if( _.isString( option.charset ) && option.charset !== '' ) {
-            switch( option.charset ) {
-              case 'Shift_JIS':
-                conv = new Iconv('cp932','utf-8');
-                break;
-              case 'utf-8':
+     
+          try {
+            // pretty
+            if( _.isString( option.charset ) && option.charset !== '' ) {
+              if( /^shift_jis$/i.test(option.charset) ||
+                  /^shift.jis$/i.test( option.charset ) ||
+                  /^cp932$/.test( option.charset ) ) {
+                conv = new Iconv(option.charset,'utf-8');
+              } else if( /^utf-8$/i.test(option.charset) ) {
                 conv = null;
-                break;
-              default:
+              } else {
                 conv = new Iconv('cp932','utf-8');
-                break;
+              }
             }
+          } catch(e) {
+            console.log("faild.iconv charset setting.");
           }
       
           // pretty
@@ -129,7 +131,7 @@
   
           return jsonFormatObject;
         });
-  
+ 
         if( app.debug ) console.log( createJson );
   
         return createJson;

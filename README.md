@@ -62,11 +62,11 @@ console.log( csv2jsonic.convert( array ) );
 Type: `Boolean`
 Default: false
 
-### debug
+### charset
 Type: `String`
-Default: Shift_JIS
+Default: cp932 // shift_jis
 
-Can be "utf-8"
+Can be utf-8.
 
 ### pretty
 Type: `Boolean`
