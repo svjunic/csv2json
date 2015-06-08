@@ -1,6 +1,6 @@
 {
   "name": "csv2jsonic",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This module returns the CSV file in Json file or object.",
   "author": "Jun Fujimura <sv.junic@gmail.com> (http://sv.junic.jp)",
   "main": "csv2jsonic.js",
