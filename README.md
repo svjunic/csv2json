@@ -62,6 +62,12 @@ console.log( csv2jsonic.convert( array ) );
 Type: `Boolean`
 Default: false
 
+### debug
+Type: `String`
+Default: Shift_JIS
+
+Can be "utf-8"
+
 ### pretty
 Type: `Boolean`
 Default: false
