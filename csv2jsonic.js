@@ -7,11 +7,11 @@
     var fs = require('fs');
     var csv = require('csv');
     var Iconv = require('iconv').Iconv;
-    var conv = new Iconv('cp932','utf-8');
+    var conv = null;
     var _ = require('lodash');
-  
     var app = {
       debug         : false,
+      charset       : 'Shift_JIS',
       pretty        : false,
       delimitter    : ':',
       reg           : /:/,
@@ -23,6 +23,21 @@
           // debug
           if( option.debug ) {
             this.debug = true;
+          }
+      
+          // pretty
+          if( _.isString( option.charset ) && option.charset !== '' ) {
+            switch( option.charset ) {
+              case 'Shift_JIS':
+                conv = new Iconv('cp932','utf-8');
+                break;
+              case 'utf-8':
+                conv = null;
+                break;
+              default:
+                conv = new Iconv('cp932','utf-8');
+                break;
+            }
           }
       
           // pretty
@@ -131,8 +146,13 @@
         var promise = new Promise( function ( resolve, reject ) {
           var json_array = [];
      
-          fs.readFile( path, function(err, sjisBuf) {
-            var buf = conv.convert(sjisBuf);
+          fs.readFile( path, function(err, _buf) {
+            var buf;
+            if( conv !== null ) {
+              buf = conv.convert( _buf );
+            } else {
+              buf = _buf;
+            }
             if( app.debug ) console.log( 'CSV Loading:' + path + ' *=-');
             csv.parse(buf.toString(),{comment:'#'}, function(err, data) {
               json_array.push( data );
