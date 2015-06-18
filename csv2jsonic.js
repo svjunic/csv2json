@@ -6,9 +6,10 @@
   
     var fs = require('fs');
     var csv = require('csv');
-    var Iconv = require('iconv').Iconv;
+    var Iconv = require('iconv-lite');
     var conv = null;
     var _ = require('lodash');
+
     var app = {
       debug         : false,
       charset       : 'cp932',
@@ -28,18 +29,13 @@
           try {
             // pretty
             if( _.isString( option.charset ) && option.charset !== '' ) {
-              if( /^shift_jis$/i.test(option.charset) ||
-                  /^shift.jis$/i.test( option.charset ) ||
-                  /^cp932$/.test( option.charset ) ) {
-                conv = new Iconv(option.charset,'utf-8');
-              } else if( /^utf-8$/i.test(option.charset) ) {
-                conv = null;
-              } else {
-                conv = new Iconv('cp932','utf-8');
-              }
+              this.charset = option.charset;
+              if( this.debug ) console.log( 'override charset setting.' );
             }
           } catch(e) {
-            console.log("faild.iconv charset setting.");
+            if( this.debug ) {
+              console.log("default charset setting.");
+            }
           }
       
           // pretty
@@ -145,16 +141,19 @@
        * @return {Promise} Promiseオブジェクト
        */
       _dumpCsv: function ( path ) {
+        var charset = this.charset;
+
         var promise = new Promise( function ( resolve, reject ) {
           var json_array = [];
      
           fs.readFile( path, function(err, _buf) {
             var buf;
-            if( conv !== null ) {
-              buf = conv.convert( _buf );
-            } else {
-              buf = _buf;
-            }
+
+            //console.log( charset );
+            //console.log( _buf );
+
+            buf = Iconv.decode( _buf, charset );
+
             if( app.debug ) console.log( 'CSV Loading:' + path + ' *=-');
             csv.parse(buf.toString(),{comment:'#'}, function(err, data) {
               json_array.push( data );
