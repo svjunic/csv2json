@@ -155,7 +155,8 @@
             buf = Iconv.decode( _buf, charset );
 
             if( app.debug ) console.log( 'CSV Loading:' + path + ' *=-');
-            csv.parse(buf.toString(),{comment:'#'}, function(err, data) {
+            //csv.parse(buf.toString(),{comment:'#'}, function(err, data) {
+            csv.parse(buf.toString(), function(err, data) {
               json_array.push( data );
               resolve( json_array );
             });
